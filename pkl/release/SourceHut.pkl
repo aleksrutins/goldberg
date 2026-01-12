@@ -5,7 +5,7 @@ import "../Config.pkl"
 class Release {
   source: Config.Source
   assets: Listing<String>
-  rev: String | Null = null
+  rev: String | Null
 
   local function releaseCmd() = new Listing {
     "hut"
@@ -22,9 +22,10 @@ class Release {
   }
 }
 
-function preset(source_: Config.Source, assets_: Listing<String>) = new Config.Preset {
+function preset(source_: Config.Source, assets_: Listing<String>, rev_: String | Null) = new Config
+  .Preset {
   name = "sourcehut"
   defaultSteps {
-    new Release { source = source_; assets = assets_ }.step
+    new Release { source = source_; assets = assets_; rev = rev_ }.step
   }
 }
