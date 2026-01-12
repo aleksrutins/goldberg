@@ -8,6 +8,7 @@ environment:
 
 tasks:
   - build-publish: |
+      cd goldberg
       go run main.go
   - pkldoc: |
       cd goldberg
