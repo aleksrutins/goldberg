@@ -41,8 +41,7 @@ class Docker {
             "source=ghcr.io/railwayapp/railpack:railpack-frontend"
           }
           "--local"
-          "dockerfile=" + file
-          root
+          "dockerfile=" + root
         }
       }
     }
