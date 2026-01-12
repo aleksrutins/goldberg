@@ -1,0 +1,4 @@
+module com.farthergate.goldberg.presets.Ruby
+import "../Config.pkl"
+
+function npmCI() = Config.command(new Listing { "npm"; "ci" })
