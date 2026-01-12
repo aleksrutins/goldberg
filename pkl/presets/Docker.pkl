@@ -37,6 +37,7 @@ class Docker {
           "--output"
           "type=image,name=" + tag
           when (railpack) {
+            "--frontend=gateway.v0"
             "--opt"
             "source=ghcr.io/railwayapp/railpack:railpack-frontend"
           }
