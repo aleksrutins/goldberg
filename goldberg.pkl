@@ -1,0 +1,15 @@
+amends "./pkl/Config.pkl"
+import "./pkl/presets/Go.pkl"
+import "./pkl/release/SourceHut.pkl"
+
+name = "goldberg"
+version = "0.0.0"
+
+use {
+  Go.preset(name, "main.go", Go.defaultArch, Go.defaultOS)
+  SourceHut.preset(source, Go.assets(name, Go.defaultArch, Go.defaultOS))
+}
+
+source {
+  repo = "goldberg"
+}

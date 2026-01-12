@@ -1,0 +1,22 @@
+image: alpine/latest
+packages:
+  - hut
+  - go
+oauth: git.sr.ht/OBJECTS:RW
+environment:
+  site: goldberg.farthergate.com
+
+tasks:
+  - build-publish: |
+      go run main.go
+  - pkldoc: |
+      cd goldberg
+      wget -O pkldoc https://github.com/apple/pkl/releases/download/0.30.2/pkldoc-alpine-linux-amd64
+      chmod +x pkldoc
+      ./pkldoc -o dist $(find pkl/ -name '*.pkl')
+  - package-site: |
+      cd goldberg
+      cp -rv pkl/* dist/
+      tar -C dist --hard-dereference -cvhz . > ../site.tar.gz
+  - upload-site: |
+      hut pages publish -d $site site.tar.gz

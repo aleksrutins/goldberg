@@ -1,0 +1,30 @@
+module com.farthergate.goldberg.release.SourceHut
+
+import "../Config.pkl"
+
+class Release {
+  source: Config.Source
+  assets: Listing<String>
+  rev: String | Null = null
+
+  local function releaseCmd() = new Listing {
+    "hut"
+    "git"
+    "artifact"
+    "upload"
+    ...assets
+    when (rev != null) { "--rev"; rev }
+  }
+
+  fixed step = new Config.Step {
+    name = "release"
+    commands = new { releaseCmd() }
+  }
+}
+
+function preset(source_: Config.Source, assets_: Listing<String>) = new Config.Preset {
+  name = "sourcehut"
+  defaultSteps {
+    new Release { source = source_; assets = assets_ }.step
+  }
+}

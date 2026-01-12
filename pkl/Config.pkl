@@ -1,0 +1,30 @@
+@go.Package { name = "farthergate.com/goldberg/config" }
+module com.farthergate.goldberg.Config
+
+import "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0.12.1#/go.pkl"
+
+class Source {
+  repo: String = ""
+}
+
+class Preset {
+  name: String
+  defaultSteps: Listing<Step>
+}
+
+class Step {
+  name: String
+  commands: Listing<Listing<String>>
+}
+
+function getDefaultSteps() = new Listing {
+  for (preset in use) {
+    ...preset.defaultSteps
+  }
+}
+
+name: String = ""
+version: String = ""
+use: Listing<Preset> = new Listing {}
+source: Source = new Source {}
+steps: Listing<Step> = getDefaultSteps()
