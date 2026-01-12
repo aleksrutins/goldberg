@@ -1,0 +1,93 @@
+module com.farthergate.goldberg.presets.Docker
+
+import "../Config.pkl"
+
+class Docker {
+  podman: Boolean = false
+
+  local exe = if (podman) "podman" else "docker"
+
+  function railpackFile(root) = root + "/.railpack-plan.json"
+
+  local function railpackPlan(root: String) = new Config.Step {
+    name = "plan"
+    commands {
+      new { "railpack"; "plan"; root; "--out"; railpackFile(root) }
+    }
+  }
+
+  local function dockerBuildx(root: String, file: String, tag: String, railpack: Boolean) = new Config
+    .Step {
+    name = "buildx"
+    commands {
+      when (podman) {
+        new {
+          exe
+          "run"
+          "-d"
+          "--name"
+          "buildkitd"
+          "--privileged"
+          "docker.io/moby/buildkit:latest"
+        }
+
+        new {
+          "buildctl"
+          "build"
+          "--output"
+          "type=docker,name=" + tag
+          when (railpack) {
+            "--opt"
+            "source=ghcr.io/railwayapp/railpack:railpack-frontend"
+          }
+          "--local"
+          "dockerfile=" + file
+          root
+        }
+      }
+    }
+    when (!podman) {
+      new {
+        "docker"
+        "buildx"
+        "build"
+        "-t"
+        tag
+        when (railpack) {
+          "--build-arg"
+          "BUILDKIT_SYNTAX=ghcr.io/railwayapp/railpack:railpack-frontend"
+        }
+        "-f"
+        file
+        root
+      }
+    }
+  }
+
+  function railpack(root: String, tag: String): Config.Preset = new {
+    name = "railpack"
+    defaultSteps {
+      outer.railpackPlan(root)
+      outer.dockerBuildx(root, root + "/.railpack-plan.json", tag, true)
+    }
+  }
+
+  function build(root: String, tag: String): Config.Preset = new {
+    name = "docker-build"
+    defaultSteps {
+      outer.dockerBuildx(root, root + "/Dockerfile", tag, false)
+    }
+  }
+
+  function push(tag: String): Config.Preset = new {
+    name = "docker-push"
+    defaultSteps {
+      new {
+        name = "push"
+        commands {
+          new { outer.exe; "push"; tag }
+        }
+      }
+    }
+  }
+}

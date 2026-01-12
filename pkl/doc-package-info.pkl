@@ -1,8 +1,10 @@
 /// A building & release management tool.
 amends "pkl:DocPackageInfo"
 
+import "../goldberg.pkl"
+
 name = "com.farthergate.goldberg"
 authors { "keeper@farthergate.com" }
-version = "0.0.0"
+version = goldberg.version
 importUri = "https://goldberg.farthergate.com/"
 issueTracker = "https://lists.sr.ht/~aleksrutins/public-inbox"

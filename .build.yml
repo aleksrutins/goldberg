@@ -6,6 +6,10 @@ oauth: git.sr.ht/OBJECTS:RW git.sr.ht/PROFILE:RO git.sr.ht/REPOSITORIES:RO pages
 environment:
   site: goldberg.farthergate.com
 
+sources:
+  - https://git.sr.ht/~aleksrutins/goldberg
+  - https://git.sr.ht/~aleksrutins/cicada
+
 tasks:
   - pkl: |
       curl -L -o pkl 'https://github.com/apple/pkl/releases/download/0.30.2/pkl-alpine-linux-amd64'
@@ -13,8 +17,10 @@ tasks:
       ./pkl --version
       sudo mv pkl /usr/bin/
   - build-publish: |
-      cd goldberg
-      go run main.go
+      if cicada commit "[release"; then
+        cd goldberg
+        go run main.go
+      fi
   - pkldoc: |
       cd goldberg
       wget -O pkldoc https://github.com/apple/pkl/releases/download/0.30.2/pkldoc-alpine-linux-amd64
