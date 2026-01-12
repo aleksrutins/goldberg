@@ -23,6 +23,20 @@ function getDefaultSteps() = new Listing {
   }
 }
 
+function command(cmd: Listing<String>) = new Step {
+  name = cmd[0]
+  commands {
+    cmd
+  }
+}
+
+function single(step: Step) = new Preset {
+  name = "custom"
+  defaultSteps {
+    step
+  }
+}
+
 fixed versionedName: String = name + "-" + version
 
 name: String = ""

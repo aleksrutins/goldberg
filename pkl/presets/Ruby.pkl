@@ -1,0 +1,6 @@
+module com.farthergate.goldberg.presets.Ruby
+import "../Config.pkl"
+
+function bundle() = Config.command(new Listing { "bundle"; "install" })
+function run(bundle: Boolean, script: String, args: Listing<String>) =
+  Config.command(new Listing { when (bundle) { "bundle"; "exec" }; "ruby"; script; ...args })
