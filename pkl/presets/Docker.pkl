@@ -7,12 +7,20 @@ class Docker {
 
   local exe = if (podman) "podman" else "docker"
 
-  function railpackFile(root) = root + "/.railpack-plan.json"
+  function railpackFile(root) = root + "/railpack-plan.json"
 
   local function railpackPlan(root: String) = new Config.Step {
     name = "plan"
     commands {
-      new { "railpack"; "plan"; root; "--out"; railpackFile(root) }
+      new {
+        "railpack"
+        "prepare"
+        root
+        "--plan-out"
+        railpackFile(root)
+        "--info-out"
+        "railpack-info.json"
+      }
     }
   }
 
@@ -24,6 +32,7 @@ class Docker {
         new {
           exe
           "run"
+          "-rm"
           "-d"
           "--name"
           "buildkitd"
@@ -33,16 +42,25 @@ class Docker {
 
         new {
           "buildctl"
+          "--addr=podman-container://buildkitd"
           "build"
+          "--local"
+          "context=" + root
           "--output"
           "type=image,name=" + tag
           when (railpack) {
             "--frontend=gateway.v0"
             "--opt"
-            "source=ghcr.io/railwayapp/railpack:railpack-frontend"
+            "source=ghcr.io/railwayapp/railpack-frontend"
           }
           "--local"
           "dockerfile=" + root
+        }
+
+        new {
+          exe
+          "stop"
+          "buildkitd"
         }
       }
     }
