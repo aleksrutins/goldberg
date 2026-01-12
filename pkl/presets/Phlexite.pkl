@@ -1,0 +1,14 @@
+module com.farthergate.goldberg.presets.Phlexite
+import "../Config.pkl"
+
+function build(script: String, bundle: Boolean) = new Config.Preset {
+  name = "phlexite-build"
+  defaultSteps {
+    new {
+      name = "phlexite-build"
+      commands {
+        new { when (bundle) { "bundle"; "exec" }; "ruby"; script }
+      }
+    }
+  }
+}
