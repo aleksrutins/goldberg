@@ -7,18 +7,22 @@ class Release {
   assets: Listing<String>
   rev: String | Null
 
-  local function releaseCmd() = new Listing {
-    "hut"
-    "git"
-    "artifact"
-    "upload"
-    ...assets
-    when (rev != null) { "--rev"; rev }
+  local function releaseCmds() = new Listing {
+    for (asset in assets) {
+      new Listing {
+        "hut"
+        "git"
+        "artifact"
+        "upload"
+        asset
+        when (rev != null) { "--rev"; rev }
+      }
+    }
   }
 
   fixed step = new Config.Step {
     name = "release"
-    commands = new { releaseCmd() }
+    commands = releaseCmds()
   }
 }
 

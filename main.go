@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"os"
 	"os/exec"
 
 	"farthergate.com/goldberg/config"
@@ -20,9 +21,9 @@ func main() {
 		for _, command := range step.Commands {
 			log.Print("CMND", "cmd", command)
 			cmd := exec.Command(command[0], command[1:]...)
-			cmd.Stdout = nil
-			cmd.Stderr = nil
-			cmd.Stdin = nil
+			cmd.Stdout = os.Stdout
+			cmd.Stderr = os.Stderr
+			cmd.Stdin = os.Stdin
 			err := cmd.Run()
 			if err != nil {
 				log.Error(err)
