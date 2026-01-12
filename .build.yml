@@ -5,13 +5,13 @@ packages:
 oauth: git.sr.ht/OBJECTS:RW git.sr.ht/PROFILE:RO git.sr.ht/REPOSITORIES:RO pages.sr.ht/PAGES:RW
 environment:
   site: goldberg.farthergate.com
-  pkl-version: 0.30.2
+  pkl_version: 0.30.2
   CLICOLOR_FORCE: "1"
 
 tasks:
   - pkl-install: |
-      wget -O pkl https://github.com/apple/pkl/releases/download/$pkl-version/pkl-alpine-linux-amd64
-      wget -O pkldoc https://github.com/apple/pkl/releases/download/$pkl-version/pkldoc-alpine-linux-amd64
+      wget -O pkl https://github.com/apple/pkl/releases/download/$pkl_version/pkl-alpine-linux-amd64
+      wget -O pkldoc https://github.com/apple/pkl/releases/download/$pkl_version/pkldoc-alpine-linux-amd64
 
       chmod +x pkl
       ./pkl --version
