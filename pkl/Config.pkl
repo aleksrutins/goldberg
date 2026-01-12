@@ -23,7 +23,7 @@ function getDefaultSteps() = new Listing {
   }
 }
 
-fixed versionedName = name + "-" + version
+fixed versionedName: String = name + "-" + version
 
 name: String = ""
 version: String = ""
