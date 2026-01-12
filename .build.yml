@@ -17,8 +17,8 @@ tasks:
       ./pkl --version
       sudo mv pkl /usr/bin/
   - build-publish: |
-      if cicada commit "[release"; then
-        cd goldberg
+      cd goldberg
+      if ../cicada/cicada commit "[release"; then
         go run main.go
       fi
   - pkldoc: |
