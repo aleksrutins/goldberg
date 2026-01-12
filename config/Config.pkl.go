@@ -8,6 +8,8 @@ import (
 )
 
 type Config struct {
+	VersionedName string `pkl:"versionedName"`
+
 	Name string `pkl:"name"`
 
 	Version string `pkl:"version"`
