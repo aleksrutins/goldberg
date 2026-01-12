@@ -1,13 +1,17 @@
 amends "./pkl/Config.pkl"
 import "./pkl/presets/Go.pkl"
+import "./pkl/presets/Pkldoc.pkl"
 import "./pkl/release/SourceHut.pkl"
 
 name = "goldberg"
 version = "0.2.0"
 
 use {
+  Pkldoc.build("pkl", "dist")
+  SourceHut.deployPages("dist", "goldberg.farthergate.com")
+
   Go.preset(module.versionedName, "main.go", Go.defaultArch, Go.defaultOS)
-  SourceHut.preset(
+  SourceHut.release(
     source,
     Go.assets(module.versionedName, Go.defaultArch, Go.defaultOS),
     "v" + version,

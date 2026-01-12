@@ -26,10 +26,39 @@ class Release {
   }
 }
 
-function preset(source_: Config.Source, assets_: Listing<String>, rev_: String | Null) = new Config
+class DeployPages {
+  publicDir: String
+  tarFile: String = "../site.tar.gz"
+  domain: String
+
+  fixed compressStep = new Config.Step {
+    name = "compress"
+    commands {
+      new { "tar"; "-C"; publicDir; "--hard-dereference"; "-cvhz"; "."; "-f"; tarFile }
+    }
+  }
+
+  fixed deployStep = new Config.Step {
+    name = "deploy"
+    commands {
+      new { "hut"; "pages"; "publish"; "-d"; domain; tarFile }
+    }
+  }
+}
+
+function release(source_: Config.Source, assets_: Listing<String>, rev_: String | Null) = new Config
   .Preset {
-  name = "sourcehut"
+  name = "sourcehut-release"
   defaultSteps {
     new Release { source = source_; assets = assets_; rev = rev_ }.step
+  }
+}
+
+function deployPages(publicDir_: String, domain_: String) = new Config.Preset {
+  local pages = new DeployPages { publicDir = publicDir_; domain = domain_ }
+  name = "sourcehut-pages"
+  defaultSteps {
+    pages.compressStep
+    pages.deployStep
   }
 }

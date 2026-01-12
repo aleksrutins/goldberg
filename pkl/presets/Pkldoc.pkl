@@ -1,0 +1,15 @@
+module com.farthergate.goldberg.presets.Pkldoc
+
+import "../Config.pkl"
+
+function build(root: String, outDir: String) = new Config.Preset {
+  name = "pkldoc"
+  defaultSteps {
+    new {
+      name = "pkldoc"
+      commands {
+        new { "sh"; "-c"; "pkldoc -o dist $(find " + root + "/ -name '*.pkl')" }
+      }
+    }
+  }
+}
