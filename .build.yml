@@ -2,7 +2,7 @@ image: alpine/latest
 packages:
   - hut
   - go
-oauth: git.sr.ht/OBJECTS:RW pages.sr.ht/PAGES:RW
+oauth: git.sr.ht/OBJECTS:RW git.sr.ht/PROFILE:RO git.sr.ht/REPOSITORIES:RO pages.sr.ht/PAGES:RW
 environment:
   site: goldberg.farthergate.com
 
