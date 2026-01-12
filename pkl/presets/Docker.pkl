@@ -35,7 +35,7 @@ class Docker {
           "buildctl"
           "build"
           "--output"
-          "type=docker,name=" + tag
+          "type=docker,name=buildctl-output"
           when (railpack) {
             "--opt"
             "source=ghcr.io/railwayapp/railpack:railpack-frontend"
@@ -43,6 +43,13 @@ class Docker {
           "--local"
           "dockerfile=" + file
           root
+        }
+
+        new {
+          exe
+          "load"
+          "-i"
+          "buildctl-output"
         }
       }
     }
