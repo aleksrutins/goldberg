@@ -67,15 +67,15 @@ class Docker {
   function railpack(root: String, tag: String): Config.Preset = new {
     name = "railpack"
     defaultSteps {
-      outer.railpackPlan(root)
-      outer.dockerBuildx(root, root + "/.railpack-plan.json", tag, true)
+      railpackPlan(root)
+      dockerBuildx(root, root + "/.railpack-plan.json", tag, true)
     }
   }
 
   function build(root: String, tag: String): Config.Preset = new {
     name = "docker-build"
     defaultSteps {
-      outer.dockerBuildx(root, root + "/Dockerfile", tag, false)
+      dockerBuildx(root, root + "/Dockerfile", tag, false)
     }
   }
 
@@ -85,7 +85,7 @@ class Docker {
       new {
         name = "push"
         commands {
-          new { outer.exe; "push"; tag }
+          new { exe; "push"; tag }
         }
       }
     }
