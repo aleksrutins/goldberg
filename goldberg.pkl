@@ -1,4 +1,5 @@
 amends "./pkl/Config.pkl"
+import "./pkl/presets/Files.pkl"
 import "./pkl/presets/Go.pkl"
 import "./pkl/presets/Pkldoc.pkl"
 import "./pkl/release/SourceHut.pkl"
@@ -8,6 +9,7 @@ version = "0.2.0"
 
 use {
   Pkldoc.build("pkl", "dist")
+  Files.copy("pkl", "dist")
   SourceHut.deployPages("dist", "goldberg.farthergate.com")
 
   Go.preset(module.versionedName, "main.go", Go.defaultArch, Go.defaultOS)

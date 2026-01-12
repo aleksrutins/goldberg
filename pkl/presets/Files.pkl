@@ -1,0 +1,14 @@
+module com.farthergate.goldberg.presets.Files
+import "../Config.pkl"
+
+function copy(source: String, dest: String) = new Config.Preset {
+  name = "copy"
+  defaultSteps {
+    new {
+      name = "copy " + source + " -> " + dest
+      commands {
+        new { "cp"; "-r"; source + "/."; "dest/" }
+      }
+    }
+  }
+}
