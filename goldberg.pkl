@@ -6,8 +6,12 @@ name = "goldberg"
 version = "0.1.0"
 
 use {
-  Go.preset(name, "main.go", Go.defaultArch, Go.defaultOS)
-  SourceHut.preset(source, Go.assets(name, Go.defaultArch, Go.defaultOS), "v" + version)
+  Go.preset(versionedName, "main.go", Go.defaultArch, Go.defaultOS)
+  SourceHut.preset(
+    source,
+    Go.assets(versionedName, Go.defaultArch, Go.defaultOS),
+    "v" + version,
+  )
 }
 
 source {

@@ -23,6 +23,8 @@ function getDefaultSteps() = new Listing {
   }
 }
 
+fixed versionedName = name + "-" + version
+
 name: String = ""
 version: String = ""
 use: Listing<Preset> = new Listing {}
