@@ -1,0 +1,9 @@
+amends "../../pkl/Config.pkl"
+import "../../pkl/presets/Rust.pkl"
+
+name = "goldberg-rust"
+version = "0.0.0"
+
+use {
+  Rust.preset(module.versionedName, new Listing { "rust" }, Rust.linux.intel)
+}

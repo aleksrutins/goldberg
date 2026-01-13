@@ -12,3 +12,17 @@ function copy(source: String, dest: String) = new Config.Preset {
     }
   }
 }
+
+function copyMap(files: Mapping<String, String>) = new Config.Preset {
+  name = "copy"
+  defaultSteps {
+    new {
+      name = "copy"
+      commands {
+        for (source, dest in files) {
+          new { "cp"; source; dest }
+        }
+      }
+    }
+  }
+}

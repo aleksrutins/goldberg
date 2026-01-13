@@ -1,0 +1,78 @@
+module com.farthergate.goldberg.presets.Rust
+
+import "../Config.pkl"
+import "./Files.pkl"
+
+function assets(bins: Listing<String>, targets: Listing<String>) = new Listing<String> {
+  for (exe in bins) {
+    for (tgt in targets) {
+      exe + "-" + tgt
+    }
+  }
+}
+
+local function installTargets(targets: Listing<String>) = new Config.Step {
+  name = "rustup-setup-targets"
+  commands {
+    for (target in targets) {
+      new { "rustup"; "target"; "add"; target }
+    }
+  }
+}
+
+local function build(exe: String, bins: Listing<String>, targets: Listing<String>) = new Config.Step {
+  name = "build"
+  commands {
+    for (target in targets) {
+      new {
+        "cargo"
+        "build"
+        "--target=" + target
+        "-r"
+      }
+    }
+
+    for (
+      cp in
+        Files
+          .copyMap(new Mapping {
+            for (target in targets) {
+              for (bin in bins) {
+                ["target/" + target + "/release/" + bin] = bin + "-" + target
+              }
+            }
+          })
+          .defaultSteps
+    ) {
+      ...cp.commands
+    }
+  }
+}
+
+linux = new {
+  intel = new Listing<String> {
+    "x86_64-unknown-linux-gnu"
+    "x86_64-unknown-linux-musl"
+  }
+  arm = new Listing<String> {
+    "aarch64-unknown-linux-gnu"
+    "aarch64-unknown-linux-musl"
+  }
+}
+
+macos = new Listing<String> {
+  "aarch64-apple-darwin"
+}
+
+windows = new Listing<String> {
+  "aarch64-pc-windows-msvc"
+  "x86_64-pc-windows-msvc"
+}
+
+function preset(exe: String, bins: Listing<String>, targets: Listing<String>) = new Config.Preset {
+  name = "rust"
+  defaultSteps {
+    installTargets(targets)
+    build(exe, bins, targets)
+  }
+}
