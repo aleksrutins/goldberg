@@ -1,6 +1,9 @@
 image: fedora/43
 packages:
   - hut
+  - wget
+  - tar
+  - gzip
   - go
 oauth: git.sr.ht/OBJECTS:RW git.sr.ht/PROFILE:RO git.sr.ht/REPOSITORIES:RO pages.sr.ht/PAGES:RW
 environment:
