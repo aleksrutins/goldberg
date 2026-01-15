@@ -1,5 +1,6 @@
 amends "./pkl/Config.pkl"
 import "./pkl/presets/Files.pkl"
+import "./pkl/presets/Forester.pkl"
 import "./pkl/presets/Go.pkl"
 import "./pkl/presets/Pkldoc.pkl"
 import "./pkl/release/SourceHut.pkl"
@@ -9,7 +10,7 @@ version = "0.2.2"
 
 use {
   Pkldoc.build("pkl", "docs/output/docs")
-  outer.single(outer.command(new Listing { "forester"; "build"; "docs/forest.toml" }))
+  Forester.build("docs/forest.toml")
   Files.copy("pkl", "docs/output")
   SourceHut.deployPages("docs/output", "goldberg.farthergate.com")
 

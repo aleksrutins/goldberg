@@ -1,0 +1,13 @@
+import "../Config.pkl"
+
+function build(forest: String) = new Config.Preset {
+  name = "forester"
+  defaultSteps {
+    new {
+      name = "forester"
+      commands {
+        new { "forester"; "build"; forest }
+      }
+    }
+  }
+}
