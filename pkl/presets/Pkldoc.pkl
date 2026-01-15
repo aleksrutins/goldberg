@@ -8,7 +8,7 @@ function build(root: String, outDir: String) = new Config.Preset {
     new {
       name = "pkldoc"
       commands {
-        new { "sh"; "-c"; "pkldoc -o dist $(find " + root + "/ -name '*.pkl')" }
+        new { "sh"; "-c"; "pkldoc -o " + outDir + " $(find " + root + "/ -name '*.pkl')" }
       }
     }
   }

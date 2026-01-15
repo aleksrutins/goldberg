@@ -1,0 +1,6 @@
+\title{Goldberg}
+\p{Goldberg is a build configuration utility, designed to simplify building and releasing various stacks and languages.}
+\ul{
+  \li{[PKL documentation](/docs)}
+  \li{[Source](https://git.sr.ht/~aleksrutins/goldberg)}
+}

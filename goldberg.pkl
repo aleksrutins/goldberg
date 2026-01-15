@@ -8,9 +8,10 @@ name = "goldberg"
 version = "0.2.2"
 
 use {
-  Pkldoc.build("pkl", "dist")
-  Files.copy("pkl", "dist")
-  SourceHut.deployPages("dist", "goldberg.farthergate.com")
+  Pkldoc.build("pkl", "docs/output/docs")
+  outer.single(outer.command(new Listing { "forester"; "build"; "docs/forest.toml" }))
+  Files.copy("pkl", "docs/output")
+  SourceHut.deployPages("docs/output", "goldberg.farthergate.com")
 
   Go.preset(module.versionedName, "main.go", Go.defaultArch, Go.defaultOS)
   SourceHut.release(
