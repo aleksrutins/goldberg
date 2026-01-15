@@ -1,8 +1,7 @@
-image: archlinux
+image: fedora/43
 packages:
   - hut
   - go
-  - pkl-bin
 oauth: git.sr.ht/OBJECTS:RW git.sr.ht/PROFILE:RO git.sr.ht/REPOSITORIES:RO pages.sr.ht/PAGES:RW
 environment:
   site: goldberg.farthergate.com
@@ -10,12 +9,8 @@ environment:
   CLICOLOR_FORCE: "1"
 
 tasks:
-  - pkldoc-install: |
-      wget -O pkldoc https://github.com/apple/pkl/releases/download/$pkl_version/pkldoc-linux-amd64
-
-      chmod +x pkldoc
-      ./pkldoc --version
-      sudo mv pkldoc /usr/bin/
+  - deps: |
+      curl https://cache.farthergate.com/install.sh | bash -s -- pkl pkldoc
   - build-publish: |
       cd goldberg
       go run main.go
