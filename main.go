@@ -33,7 +33,7 @@ func main() {
 			cmd.Stdin = os.Stdin
 			err := cmd.Run()
 			if err != nil {
-				log.Error(err)
+				log.Fatal(err)
 			}
 		}
 	}
