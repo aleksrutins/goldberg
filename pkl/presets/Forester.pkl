@@ -1,3 +1,5 @@
+module com.farthergate.goldberg.presets.Forester
+
 import "../Config.pkl"
 
 function build(forest: String) = new Config.Preset {
