@@ -4,7 +4,7 @@
   <groupId>com.farthergate</groupId>
   <artifactId>goldberg</artifactId>
   <name>goldberg</name>
-  <version>0.4.1</version>
+  <version>0.5.0</version>
   <description>Highly configurable build plumbing.</description>
   <url>http://goldberg.farthergate.com</url>
   <build>
