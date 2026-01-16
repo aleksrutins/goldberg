@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# based on https://mill-build.org/blog/5-executable-jars.html
+
 JAVA_OPTS="--sun-misc-unsafe-memory-access=allow --enable-native-access=ALL-UNNAMED"
 
 cat > $1 <<EOF
