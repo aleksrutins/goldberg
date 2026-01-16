@@ -22,6 +22,9 @@ class Release {
 
   fixed step = new Config.Step {
     name = "release"
+    packages {
+      "hut"
+    }
     commands = releaseCmds()
   }
 }
@@ -33,6 +36,7 @@ class DeployPages {
 
   fixed compressStep = new Config.Step {
     name = "compress"
+    packages { "tar"; "gzip" }
     commands {
       new { "tar"; "-C"; publicDir; "--hard-dereference"; "-cvhz"; "."; "-f"; tarFile }
     }
@@ -40,6 +44,9 @@ class DeployPages {
 
   fixed deployStep = new Config.Step {
     name = "deploy"
+    packages {
+      "hut"
+    }
     commands {
       new { "hut"; "pages"; "publish"; "-d"; domain; tarFile }
     }

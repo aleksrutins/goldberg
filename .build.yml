@@ -1,20 +1,20 @@
-image: fedora/43
-packages:
-  - hut
-  - wget
-  - tar
+image: 'fedora:43'
+packages: 
   - gzip
-  - java-latest-openjdk-devel
-oauth: git.sr.ht/OBJECTS:RW git.sr.ht/PROFILE:RO git.sr.ht/REPOSITORIES:RO pages.sr.ht/PAGES:RW
-environment:
-  site: goldberg.farthergate.com
-  pkl_version: 0.30.2
-  CLICOLOR_FORCE: "1"
+  - hut
+  - 'java-latest-openjdk-devel'
+  - tar
+  - wget
+oauth: 'git.sr.ht/OBJECTS:RW git.sr.ht/PROFILE:RO git.sr.ht/REPOSITORIES:RO pages.sr.ht/PAGES:RW'
+environment: {}
 
-tasks:
-  - deps: |
-      curl https://cache.farthergate.com/install.sh | bash -s -- pkldoc forester
-  - build-publish: |
-      cd goldberg
-      ./mvnw package
-      java -jar target/goldberg-*.jar
+tasks: 
+  - bash: "\"cd\" \"goldberg\"\n\"bash\" \"-c\" \"curl https://cache.farthergate.com/install.sh | bash -s -- pkldoc\""
+  - pkldoc: "\"cd\" \"goldberg\"\n\"sh\" \"-c\" \"pkldoc -o docs/output/docs $(find pkl/ -name '*.pkl')\""
+  - forester: "\"cd\" \"goldberg\"\n\"forester\" \"build\" \"docs/forest.toml\""
+  - 'copy pkl -> docs/output': "\"cd\" \"goldberg\"\n\"cp\" \"-r\" \"pkl/.\" \"docs/output/\""
+  - compress: "\"cd\" \"goldberg\"\n\"tar\" \"-C\" \"docs/output\" \"--hard-dereference\" \"-cvhz\" \".\" \"-f\" \"../site.tar.gz\""
+  - deploy: "\"cd\" \"goldberg\"\n\"hut\" \"pages\" \"publish\" \"-d\" \"goldberg.farthergate.com\" \"../site.tar.gz\""
+  - 'maven:package': "\"cd\" \"goldberg\"\n\"./mvnw\" \"package\""
+  - 'java:make-exe': "\"cd\" \"goldberg\"\n\"bash\" \"build-aux/java/make-executable-jar.sh\" \"target/goldberg-0.3.0.jar\" \"goldberg-0.3.0\""
+  - release: "\"cd\" \"goldberg\"\n\"hut\" \"git\" \"artifact\" \"upload\" \"goldberg-0.3.0\" \"--rev\" \"v0.3.0\""

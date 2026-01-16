@@ -6,6 +6,7 @@ function package(wrapper: Boolean) = new Config.Preset {
   name = "maven:package"
   defaultSteps {
     new {
+      packages { "java-latest-openjdk-devel" }
       name = "maven:package"
       commands {
         new {

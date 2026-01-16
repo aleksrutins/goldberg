@@ -19,4 +19,4 @@ exit /B %errorlevel%
 EOF
 
 cat $1 >> $2
-chmod +x $1
+chmod +x $2

@@ -27,6 +27,12 @@ class Docker {
   local function dockerBuildx(root: String, file: String, tag: String, railpack: Boolean) = new Config
     .Step {
     name = "buildx"
+    packages {
+      when (podman) {
+        "podman"
+        "docker-buildctl"
+      } else { "docker-buildx" }
+    }
     commands {
       when (podman) {
         new {

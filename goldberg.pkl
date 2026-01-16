@@ -1,6 +1,9 @@
 amends "./pkl/Config.pkl"
+import "https://cache.farthergate.com/Cache.pkl"
+
 import "./pkl/presets/Files.pkl"
 import "./pkl/presets/Forester.pkl"
+import "./pkl/presets/Java.pkl"
 import "./pkl/presets/Maven.pkl"
 import "./pkl/presets/Pkldoc.pkl"
 import "./pkl/release/SourceHut.pkl"
@@ -9,15 +12,15 @@ name = "goldberg"
 version = "0.3.0"
 
 use {
+  outer.single(outer.command(Cache.install(new Listing { "pkldoc" }).defaultSteps[0].commands[0]))
+
   Pkldoc.build("pkl", "docs/output/docs")
   Forester.build("docs/forest.toml")
   Files.copy("pkl", "docs/output")
   SourceHut.deployPages("docs/output", "goldberg.farthergate.com")
 
   Maven.package(true)
-  module.single(
-    module.command(new Listing { "bash"; "make-executable-jar.sh"; module.versionedName }),
-  )
+  Java.makeJarExecutable("target/" + module.versionedName + ".jar", module.versionedName)
   SourceHut.release(
     source,
     new Listing { module.versionedName },
@@ -27,4 +30,13 @@ use {
 
 source {
   repo = "goldberg"
+}
+
+ci {
+  oauth {
+    "git.sr.ht/OBJECTS:RW"
+    "git.sr.ht/PROFILE:RO"
+    "git.sr.ht/REPOSITORIES:RO"
+    "pages.sr.ht/PAGES:RW"
+  }
 }

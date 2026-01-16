@@ -10,7 +10,8 @@ internal fun main() {
     CliKotlinCodeGenerator(
         CliKotlinCodeGeneratorOptions(
             CliBaseOptions(listOf(URI("./pkl/Config.pkl"))),
-            Path("./src/main/")
+            Path("./src/main/"),
+            implementSerializable = true
         )
     ).run()
 }
