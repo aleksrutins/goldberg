@@ -6,7 +6,7 @@ import "./pkl/presets/Pkldoc.pkl"
 import "./pkl/release/SourceHut.pkl"
 
 name = "goldberg"
-version = "0.2.2"
+version = "0.3.0"
 
 use {
   Pkldoc.build("pkl", "docs/output/docs")
