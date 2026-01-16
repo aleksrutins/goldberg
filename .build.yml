@@ -10,6 +10,8 @@ environment:
   CLICOLOR_FORCE: always
 tasks: 
   - bash: "\"cd\" \"goldberg\"\ncurl https://cache.farthergate.com/install.sh | bash -s -- pkldoc forester"
+  - theme_install: "\"cd\" \"goldberg\"\n\"mkdir\" \"-p\" \"theme\"\n\"wget\" \"-O\" \"theme.tar.gz\" \"https://git.sr.ht/~aleksrutins/forester-theme/refs/download/v0.0.1/forester-theme-0.0.1.tar.gz\"\n\"tar\" \"xzf\" \"theme.tar.gz\" \"-C\" \"theme\""
+  - copy_theme: "\"cd\" \"goldberg\"\n\"cp\" \"-r\" \"theme/.\" \"docs/theme/\""
   - pkldoc: "\"cd\" \"goldberg\"\npkldoc -o docs/output/docs $(find pkl/ -name '*.pkl')"
   - forester: "\"cd\" \"goldberg\"\n\"forester\" \"build\" \"docs/forest.toml\""
   - copy_pkl: "\"cd\" \"goldberg\"\n\"cp\" \"-r\" \"pkl/.\" \"docs/output/\""
