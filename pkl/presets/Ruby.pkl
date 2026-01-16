@@ -1,6 +1,21 @@
 module com.farthergate.goldberg.presets.Ruby
 import "../Config.pkl"
 
-function bundle() = Config.command(new Listing { "bundle"; "install" })
-function run(bundle: Boolean, script: String, args: Listing<String>) =
-  Config.command(new Listing { when (bundle) { "bundle"; "exec" }; "ruby"; script; ...args })
+function bundle() = new Config.Step {
+  name = "ruby:bundle"
+  commands { new { "bundle"; "install" } }
+  packages {
+    "ruby"
+    "ruby-devel"
+    "rubygem-bundler"
+  }
+}
+function run(bundle: Boolean, script: String, args: Listing<String>) = new Config.Step {
+  name = "ruby:bundle"
+  commands { new { when (bundle) { "bundle"; "exec" }; "ruby"; script; ...args } }
+  packages {
+    "ruby"
+    "ruby-devel"
+    when (bundle) { "rubygem-bundler" }
+  }
+}
