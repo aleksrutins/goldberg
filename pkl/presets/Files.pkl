@@ -5,7 +5,7 @@ function copy(source: String, dest: String) = new Config.Preset {
   name = "copy"
   defaultSteps {
     new {
-      name = "copy " + source + " -> " + dest
+      name = "copy:" + source
       commands {
         new { "cp"; "-r"; source + "/."; dest + "/" }
       }

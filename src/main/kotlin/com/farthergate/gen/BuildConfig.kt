@@ -32,7 +32,7 @@ data class BuildConfig(
                 config.ci.environment,
 
                 config.steps.map { step ->
-                    mapOf(step.name to listOf(
+                    mapOf(step.name.lowercase().replace(Regex("[^a-z0-9\\-_]"), "_") to listOf(
                         listOf("cd", config.source.repo),
                         *step.commands.toTypedArray()
                     ).joinToString("\n") { cmd ->
