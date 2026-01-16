@@ -9,7 +9,7 @@ import "./pkl/presets/Pkldoc.pkl"
 import "./pkl/release/SourceHut.pkl"
 
 name = "goldberg"
-version = "0.3.0"
+version = "0.4.0"
 
 use {
   outer.single(
@@ -40,5 +40,8 @@ ci {
     "git.sr.ht/PROFILE:RO"
     "git.sr.ht/REPOSITORIES:RO"
     "pages.sr.ht/PAGES:RW"
+  }
+  environment {
+    ["CLICOLOR_FORCE"] = "always"
   }
 }
