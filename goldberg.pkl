@@ -15,8 +15,9 @@ use {
   SourceHut.deployPages("docs/output", "goldberg.farthergate.com")
 
   Maven.package(true)
-  module.single(module.command(new Listing { "bash"; "make-executable-jar.sh" }))
-  Files.copyMap(new Mapping { ["goldberg"] = module.versionedName })
+  module.single(
+    module.command(new Listing { "bash"; "make-executable-jar.sh"; module.versionedName }),
+  )
   SourceHut.release(
     source,
     new Listing { module.versionedName },

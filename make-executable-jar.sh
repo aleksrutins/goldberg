@@ -2,7 +2,7 @@
 
 JAVA_OPTS="--sun-misc-unsafe-memory-access=allow --enable-native-access=ALL-UNNAMED"
 
-cat > goldberg <<EOF
+cat > $1 <<EOF
 @ 2>/dev/null # 2>nul & echo off & goto BOF
 :
 exec java $JAVA_OPTS  \$JAVA_OPTS -cp "\$0" 'com.farthergate.AppKt' "$@"
@@ -16,5 +16,5 @@ endlocal
 exit /B %errorlevel%
 EOF
 
-cat target/goldberg-*.jar >> goldberg
-chmod +x goldberg
+cat target/goldberg-*.jar >> $1
+chmod +x $1
