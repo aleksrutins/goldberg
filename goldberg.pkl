@@ -1,7 +1,7 @@
 amends "./pkl/Config.pkl"
 import "./pkl/presets/Files.pkl"
 import "./pkl/presets/Forester.pkl"
-import "./pkl/presets/Go.pkl"
+import "./pkl/presets/Maven.pkl"
 import "./pkl/presets/Pkldoc.pkl"
 import "./pkl/release/SourceHut.pkl"
 
@@ -14,10 +14,11 @@ use {
   Files.copy("pkl", "docs/output")
   SourceHut.deployPages("docs/output", "goldberg.farthergate.com")
 
-  Go.preset(module.versionedName, "main.go", Go.defaultArch, Go.defaultOS)
+  Maven.package(true)
+  Files.copyMap(new Mapping { ["goldberg"] = module.versionedName })
   SourceHut.release(
     source,
-    Go.assets(module.versionedName, Go.defaultArch, Go.defaultOS),
+    new Listing { module.versionedName },
     "v" + version,
   )
 }

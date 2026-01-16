@@ -1,0 +1,18 @@
+module com.farthergate.goldberg.presets.Maven
+
+import "../Config.pkl"
+
+function package(wrapper: Boolean) = new Config.Preset {
+  name = "maven:package"
+  defaultSteps {
+    new {
+      name = "maven:package"
+      commands {
+        new {
+          if (wrapper) "./mvnw" else "mvn"
+          "package"
+        }
+      }
+    }
+  }
+}

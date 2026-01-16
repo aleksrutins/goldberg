@@ -4,7 +4,7 @@ packages:
   - wget
   - tar
   - gzip
-  - go
+  - java-latest-openjdk-devel
 oauth: git.sr.ht/OBJECTS:RW git.sr.ht/PROFILE:RO git.sr.ht/REPOSITORIES:RO pages.sr.ht/PAGES:RW
 environment:
   site: goldberg.farthergate.com
@@ -16,4 +16,5 @@ tasks:
       curl https://cache.farthergate.com/install.sh | bash -s -- pkl pkldoc forester
   - build-publish: |
       cd goldberg
-      go run main.go
+      ./mvnw package
+      
