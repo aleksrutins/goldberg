@@ -13,6 +13,8 @@ data class Config(
   val use: List<Preset>,
   val source: Source,
   val steps: List<Step>,
+  val tasks: Map<String, List<Preset>>,
+  val taskSteps: Map<String, List<Step>>,
   val ci: CI
 ) : Serializable {
   data class Source(

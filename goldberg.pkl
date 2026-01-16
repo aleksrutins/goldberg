@@ -11,23 +11,36 @@ import "./pkl/release/SourceHut.pkl"
 name = "goldberg"
 version = "0.4.1"
 
+local buildDocs = new Listing {
+  Pkldoc.build("pkl", "docs/output/docs")
+  Forester.build("docs/forest.toml")
+  Files.copy("pkl", "docs/output")
+}
+
+local buildExe = new Listing {
+  Maven.package(true)
+  Java.makeJarExecutable("target/" + module.versionedName + ".jar", module.versionedName)
+}
+
 use {
   outer.single(
     outer.command(Cache.install(new Listing { "pkldoc"; "forester" }).defaultSteps[0].commands[0]),
   )
 
-  Pkldoc.build("pkl", "docs/output/docs")
-  Forester.build("docs/forest.toml")
-  Files.copy("pkl", "docs/output")
+  ...buildDocs
   SourceHut.deployPages("docs/output", "goldberg.farthergate.com")
 
-  Maven.package(true)
-  Java.makeJarExecutable("target/" + module.versionedName + ".jar", module.versionedName)
+  ...buildExe
   SourceHut.release(
     source,
     new Listing { module.versionedName },
     "v" + version,
   )
+}
+
+tasks {
+  ["docs"] = buildDocs
+  ["exe"] = buildExe
 }
 
 source {

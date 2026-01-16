@@ -3,7 +3,7 @@ module com.farthergate.goldberg.Config
 import "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0.12.1#/go.pkl"
 
 class Source {
-  repo: String = outer.name
+  repo: String = ""
 }
 
 class CI {
@@ -25,8 +25,8 @@ class Step {
   resources: Mapping<String, String> = new {}
 }
 
-function getDefaultSteps() = new Listing {
-  for (preset in use) {
+function getDefaultSteps(presets: Listing<Preset>) = new Listing {
+  for (preset in presets) {
     ...preset.defaultSteps
   }
 }
@@ -51,5 +51,7 @@ name: String = ""
 version: String = ""
 use: Listing<Preset> = new Listing {}
 source: Source = new Source {}
-steps: Listing<Step> = getDefaultSteps()
+fixed steps: Listing<Step> = getDefaultSteps(use)
+tasks: Mapping<String, Listing<Preset>> = new Mapping {}
+fixed taskSteps: Map<String, Listing<Step>> = tasks.toMap().mapValues((_, v) -> getDefaultSteps(v))
 ci: CI = new CI {}
