@@ -9,8 +9,8 @@ oauth: 'git.sr.ht/OBJECTS:RW git.sr.ht/PROFILE:RO git.sr.ht/REPOSITORIES:RO page
 environment: {}
 
 tasks: 
-  - bash: "\"cd\" \"goldberg\"\n\"bash\" \"-c\" \"curl https://cache.farthergate.com/install.sh | bash -s -- pkldoc\""
-  - pkldoc: "\"cd\" \"goldberg\"\n\"sh\" \"-c\" \"pkldoc -o docs/output/docs $(find pkl/ -name '*.pkl')\""
+  - bash: "\"cd\" \"goldberg\"\ncurl https://cache.farthergate.com/install.sh | bash -s -- pkldoc"
+  - pkldoc: "\"cd\" \"goldberg\"\npkldoc -o docs/output/docs $(find pkl/ -name '*.pkl')"
   - forester: "\"cd\" \"goldberg\"\n\"forester\" \"build\" \"docs/forest.toml\""
   - copy_pkl: "\"cd\" \"goldberg\"\n\"cp\" \"-r\" \"pkl/.\" \"docs/output/\""
   - compress: "\"cd\" \"goldberg\"\n\"tar\" \"-C\" \"docs/output\" \"--hard-dereference\" \"-cvhz\" \".\" \"-f\" \"../site.tar.gz\""

@@ -36,7 +36,10 @@ data class BuildConfig(
                         listOf("cd", config.source.repo),
                         *step.commands.toTypedArray()
                     ).joinToString("\n") { cmd ->
-                        cmd.joinToString(" ") { "\"" + it.replace("\"", "\\\"") + "\"" }
+                        if((cmd.getOrNull(0) == "bash" || cmd.getOrNull(0) == "sh") && cmd.getOrNull(1) == "-c")
+                            cmd[2]
+                        else
+                            cmd.joinToString(" ") { "\"" + it.replace("\"", "\\\"") + "\"" }
                     }) },
 
                 config.steps.map { step -> step.resources }.reduce { acc, map -> acc + map }
