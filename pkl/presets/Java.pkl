@@ -22,7 +22,7 @@ function makeJarExecutable(jar: String, outFile: String) = new Config.Preset {
           cat > $2 <<EOF
           @ 2>/dev/null # 2>nul & echo off & goto BOF
           :
-          exec java $JAVA_OPTS  \$JAVA_OPTS -cp "\$0" 'com.farthergate.AppKt' "$@"
+          exec java $JAVA_OPTS  \$JAVA_OPTS -cp "\$0" 'com.farthergate.AppKt' "\$@"
           exit
 
           :BOF

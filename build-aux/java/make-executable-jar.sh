@@ -7,7 +7,7 @@ JAVA_OPTS="--sun-misc-unsafe-memory-access=allow --enable-native-access=ALL-UNNA
 cat > $2 <<EOF
 @ 2>/dev/null # 2>nul & echo off & goto BOF
 :
-exec java $JAVA_OPTS  \$JAVA_OPTS -cp "\$0" 'com.farthergate.AppKt' "$@"
+exec java $JAVA_OPTS  \$JAVA_OPTS -cp "\$0" 'com.farthergate.AppKt' "\$@"
 exit
 
 :BOF
