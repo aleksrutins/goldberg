@@ -2,3 +2,5 @@ goldberg-*
 /pkldoc
 target/
 /goldberg
+theme.tar.gz
+theme/

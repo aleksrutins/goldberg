@@ -1,5 +1,6 @@
 amends "./pkl/Config.pkl"
 import "https://cache.farthergate.com/Cache.pkl"
+import "https://git.sr.ht/~aleksrutins/forester-theme/blob/main/Theme.pkl"
 
 import "./pkl/presets/Files.pkl"
 import "./pkl/presets/Forester.pkl"
@@ -12,6 +13,11 @@ name = "goldberg"
 version = "0.5.0"
 
 local buildDocs = new Listing {
+  module.single(new Step {
+    name = "theme:install"
+    commands = Theme.install.defaultSteps[0].commands
+  })
+  Files.copy("theme", "docs/theme")
   Pkldoc.build("pkl", "docs/output/docs")
   Forester.build("docs/forest.toml")
   Files.copy("pkl", "docs/output")
