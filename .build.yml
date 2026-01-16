@@ -16,5 +16,5 @@ tasks:
   - compress: "\"cd\" \"goldberg\"\n\"tar\" \"-C\" \"docs/output\" \"--hard-dereference\" \"-cvhz\" \".\" \"-f\" \"../site.tar.gz\""
   - deploy: "\"cd\" \"goldberg\"\n\"hut\" \"pages\" \"publish\" \"-d\" \"goldberg.farthergate.com\" \"../site.tar.gz\""
   - maven_package: "\"cd\" \"goldberg\"\n\"./mvnw\" \"package\""
-  - 'java_make-exe': "\"cd\" \"goldberg\"\n\"bash\" \"build-aux/java/make-executable-jar.sh\" \"target/goldberg-0.4.0.jar\" \"goldberg-0.4.0\""
-  - release: "\"cd\" \"goldberg\"\n\"hut\" \"git\" \"artifact\" \"upload\" \"goldberg-0.4.0\" \"--rev\" \"v0.4.0\""
+  - 'java_make-exe': "\"cd\" \"goldberg\"\n\"bash\" \"build-aux/java/make-executable-jar.sh\" \"target/goldberg-0.4.1.jar\" \"goldberg-0.4.1\""
+  - release: "\"cd\" \"goldberg\"\n\"hut\" \"git\" \"artifact\" \"upload\" \"goldberg-0.4.1\" \"--rev\" \"v0.4.1\""

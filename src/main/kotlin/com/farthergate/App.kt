@@ -13,7 +13,7 @@ import org.pkl.config.kotlin.to
 import org.pkl.core.ModuleSource
 import kotlin.system.exitProcess
 
-class App : CliktCommand() {
+class App : CliktCommand("goldberg") {
     override fun run() = Unit
 }
 
