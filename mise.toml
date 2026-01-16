@@ -1,7 +1,2 @@
 [tools]
-go = "latest"
 hk = "latest"
-pkl = "latest"
-
-[tasks]
-pkl-gen = "go tool pkl-gen-go pkl/Config.pkl --base-path farthergate.com/goldberg"
