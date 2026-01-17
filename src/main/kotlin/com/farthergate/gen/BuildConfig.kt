@@ -1,7 +1,8 @@
 package com.farthergate.gen
 
 import com.farthergate.goldberg.Config
-import com.farthergate.util.Format
+import com.github.ajalt.mordant.rendering.TextStyles.*
+import com.github.ajalt.mordant.rendering.TextColors.*
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import kotlinx.serialization.builtins.serializer
@@ -51,7 +52,7 @@ data class BuildConfig(
     fun writeResources() {
         for (res in resources) {
             val p = Path("./build-aux", res.key)
-            println("write\t${Format.bold(p.toString())}")
+            println("write\t${bold(p.toString())}")
             p.createParentDirectories()
             p.writeText(res.value)
         }
@@ -60,7 +61,7 @@ data class BuildConfig(
     fun write() {
         val out = Yaml.encodeToString(BuildConfig.serializer(), this)
 
-        println("write\t${Format.bold(".build.yml")}")
+        println("write\t${bold(".build.yml")}")
         File(".build.yml").writeText(out)
 
         writeResources()

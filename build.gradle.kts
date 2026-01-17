@@ -25,6 +25,8 @@ dependencies {
     implementation("org.pkl-lang:pkl-codegen-kotlin:0.30.2")
     implementation("net.mamoe.yamlkt:yamlkt:0.13.0")
     implementation("com.github.ajalt.clikt:clikt:5.1.0")
+    implementation("com.github.ajalt.mordant:mordant:3.0.2")
+    implementation("com.github.ajalt.colormath:colormath:3.6.1")
 }
 
 group = "com.farthergate"
