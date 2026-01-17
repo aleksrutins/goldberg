@@ -7,6 +7,7 @@ rootProject.name = "goldberg"
 pluginManagement {
     repositories {
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 
