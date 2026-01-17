@@ -2,7 +2,6 @@ image: 'fedora/43'
 packages: 
   - gzip
   - hut
-  - 'java-17-openjdk-devel'
   - 'java-latest-openjdk-devel'
   - tar
   - wget
