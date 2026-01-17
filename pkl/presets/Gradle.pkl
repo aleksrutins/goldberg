@@ -1,0 +1,19 @@
+module com.farthergate.goldberg.presets.Gradle
+
+import "../Config.pkl"
+
+function task(task: String, wrapper: Boolean) = new Config.Preset {
+  name = "gradle:" + task
+  defaultSteps {
+    new {
+      packages { "java-latest-openjdk-devel" }
+      name = "gradle:" + task
+      commands {
+        new {
+          if (wrapper) "./gradlew" else "gradle"
+          task
+        }
+      }
+    }
+  }
+}
