@@ -1,6 +1,7 @@
 package com.farthergate.gen
 
 import com.farthergate.goldberg.Config
+import com.farthergate.util.Format
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import kotlinx.serialization.builtins.serializer
@@ -47,15 +48,21 @@ data class BuildConfig(
         }
     }
 
-    fun write() {
-        val out = Yaml.encodeToString(BuildConfig.serializer(), this)
-
-        File(".build.yml").writeText(out)
-
+    fun writeResources() {
         for (res in resources) {
             val p = Path("./build-aux", res.key)
+            println("write\t${Format.bold(p.toString())}")
             p.createParentDirectories()
             p.writeText(res.value)
         }
+    }
+
+    fun write() {
+        val out = Yaml.encodeToString(BuildConfig.serializer(), this)
+
+        println("write\t${Format.bold(".build.yml")}")
+        File(".build.yml").writeText(out)
+
+        writeResources()
     }
 }

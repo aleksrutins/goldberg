@@ -10,7 +10,7 @@ environment:
   CLICOLOR_FORCE: always
 tasks: 
   - bash: "\"cd\" \"goldberg\"\ncurl https://cache.farthergate.com/install.sh | bash -s -- pkldoc forester"
-  - theme_install: "\"cd\" \"goldberg\"\n\"mkdir\" \"-p\" \"theme\"\n\"wget\" \"-O\" \"theme.tar.gz\" \"https://git.sr.ht/~aleksrutins/forester-theme/refs/download/v0.1.1/forester-theme-0.1.1.tar.gz\"\n\"tar\" \"xzf\" \"theme.tar.gz\" \"-C\" \"theme\""
+  - theme_install: "\"cd\" \"goldberg\"\n\"mkdir\" \"-p\" \"theme\"\n\"wget\" \"-O\" \"theme.tar.gz\" \"https://git.sr.ht/~aleksrutins/forester-theme/refs/download/v0.1.2/forester-theme-0.1.2.tar.gz\"\n\"tar\" \"xzf\" \"theme.tar.gz\" \"-C\" \"theme\""
   - copy_theme: "\"cd\" \"goldberg\"\n\"cp\" \"-r\" \"theme/.\" \"docs/theme/\""
   - pkldoc: "\"cd\" \"goldberg\"\npkldoc -o docs/output/docs $(find pkl/ -name '*.pkl')"
   - forester: "\"cd\" \"goldberg\"\n\"forester\" \"build\" \"docs/forest.toml\""

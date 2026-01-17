@@ -1,5 +1,6 @@
 package com.farthergate.commands
 
+import com.farthergate.gen.BuildConfig
 import com.farthergate.goldberg.Config
 import com.farthergate.goldberg.load
 import com.farthergate.util.Format
@@ -16,6 +17,8 @@ class Run : CliktCommand() {
         val config = Config.load()
 
         println("project\t" + Format.bold(config.versionedName))
+
+        BuildConfig.fromConfig(config).writeResources()
 
         val steps = if(task.isNullOrBlank()) config.steps else config.taskSteps[task]
 
