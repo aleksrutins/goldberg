@@ -2,7 +2,7 @@ module com.farthergate.goldberg.presets.Java
 
 import "../Config.pkl"
 
-function makeJarExecutable(jar: String, outFile: String) = new Config.Preset {
+function makeJarExecutable(jar: String, mainClass: String, outFile: String) = new Config.Preset {
   name = "java:make-exe"
   defaultSteps {
     new {
@@ -22,20 +22,29 @@ function makeJarExecutable(jar: String, outFile: String) = new Config.Preset {
           cat > $2 <<EOF
           @ 2>/dev/null # 2>nul & echo off & goto BOF
           :
-          exec java $JAVA_OPTS  \$JAVA_OPTS -cp "\$0" 'com.farthergate.AppKt' "\$@"
-          exit
-
-          :BOF
-          setlocal
-          @echo off
-          java $JAVA_OPTS %JAVA_OPTS% -cp "%~dpnx0" com.farthergate.AppKt %*
-          endlocal
-          exit /B %errorlevel%
-          EOF
-
-          cat $1 >> $2
-          chmod +x $2
+          exec java $JAVA_OPTS  \$JAVA_OPTS -cp "\$0" '
           """#
+            + mainClass
+            + #"""
+            ' "\$@"
+            exit
+
+            :BOF
+            setlocal
+            @echo off
+            java $JAVA_OPTS %JAVA_OPTS% -cp "%~dpnx0"
+            """#
+            + " "
+            + mainClass
+            + #"""
+             %*
+            endlocal
+            exit /B %errorlevel%
+            EOF
+
+            cat $1 >> $2
+            chmod +x $2
+            """#
       }
     }
   }

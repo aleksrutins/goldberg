@@ -25,7 +25,11 @@ local buildDocs = new Listing {
 
 local buildExe = new Listing {
   Maven.package(true)
-  Java.makeJarExecutable("target/" + module.versionedName + ".jar", module.versionedName)
+  Java.makeJarExecutable(
+    "target/" + module.versionedName + ".jar",
+    "com.farthergate.AppKt",
+    module.versionedName,
+  )
 }
 
 use {
