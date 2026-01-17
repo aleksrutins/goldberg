@@ -9,7 +9,7 @@ oauth: 'git.sr.ht/OBJECTS:RW git.sr.ht/PROFILE:RO git.sr.ht/REPOSITORIES:RO page
 environment: 
   CLICOLOR_FORCE: always
 tasks: 
-  - bash: "\"cd\" \"goldberg\"\ncurl https://cache.farthergate.com/install.sh | bash -s -- pkldoc forester"
+  - bash: "\"cd\" \"goldberg\"\ncurl https://cache.farthergate.com/install.sh | bash -s -- forester"
   - theme_install: "\"cd\" \"goldberg\"\n\"mkdir\" \"-p\" \"theme\"\n\"wget\" \"-O\" \"theme.tar.gz\" \"https://git.sr.ht/~aleksrutins/forester-theme/refs/download/v0.1.2/forester-theme-0.1.2.tar.gz\"\n\"tar\" \"xzf\" \"theme.tar.gz\" \"-C\" \"theme\""
   - copy_theme: "\"cd\" \"goldberg\"\n\"cp\" \"-r\" \"theme/.\" \"docs/theme/\""
   - pkldoc: "\"cd\" \"goldberg\"\npkldoc -o docs/output/docs $(find pkl/ -name '*.pkl')"
@@ -17,6 +17,6 @@ tasks:
   - copy_pkl: "\"cd\" \"goldberg\"\n\"cp\" \"-r\" \"pkl/.\" \"docs/output/\""
   - compress: "\"cd\" \"goldberg\"\n\"tar\" \"-C\" \"docs/output\" \"--hard-dereference\" \"-cvhz\" \".\" \"-f\" \"../site.tar.gz\""
   - deploy: "\"cd\" \"goldberg\"\n\"hut\" \"pages\" \"publish\" \"-d\" \"goldberg.farthergate.com\" \"../site.tar.gz\""
-  - maven_package: "\"cd\" \"goldberg\"\n\"./mvnw\" \"package\""
-  - 'java_make-exe': "\"cd\" \"goldberg\"\n\"bash\" \"build-aux/java/make-executable-jar.sh\" \"target/goldberg-0.5.0.jar\" \"goldberg-0.5.0\""
+  - gradle_fatjar: "\"cd\" \"goldberg\"\n\"./gradlew\" \"fatJar\""
+  - 'java_make-exe': "\"cd\" \"goldberg\"\n\"bash\" \"build-aux/java/make-executable-jar.sh\" \"build/libs/goldberg-0.5.0-standalone.jar\" \"goldberg-0.5.0\""
   - release: "\"cd\" \"goldberg\"\n\"hut\" \"git\" \"artifact\" \"upload\" \"goldberg-0.5.0\" \"--rev\" \"v0.5.0\""
