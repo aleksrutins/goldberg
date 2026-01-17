@@ -7,7 +7,6 @@ plugins {
     id("org.pkl-lang") version "0.30.2"
     kotlin("jvm") version "2.3.0"
     kotlin("plugin.serialization") version "2.3.0"
-    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
 repositories {
