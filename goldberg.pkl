@@ -64,6 +64,9 @@ ci {
     "git.sr.ht/REPOSITORIES:RO"
     "pages.sr.ht/PAGES:RW"
   }
+  packages {
+    "java-17-openjdk-devel"
+  }
   environment {
     ["CLICOLOR_FORCE"] = "always"
   }
