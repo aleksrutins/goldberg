@@ -20,6 +20,12 @@ local buildDocs = new Listing {
   Files.copy("theme", "docs/theme")
   Pkldoc.build("pkl", "docs/output/docs")
   Forester.build("docs/forest.toml")
+  module.single(new Step {
+    local pr = Theme.transformToHTML("docs/output")
+    name = "theme:transform-html"
+    commands = pr.defaultSteps[0].commands
+    resources = pr.defaultSteps[0].resources
+  })
   Files.copy("pkl", "docs/output")
 }
 

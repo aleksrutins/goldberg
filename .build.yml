@@ -14,6 +14,7 @@ tasks:
   - copy_theme: "\"cd\" \"goldberg\"\n\"cp\" \"-r\" \"theme/.\" \"docs/theme/\""
   - pkldoc: "\"cd\" \"goldberg\"\npkldoc -o docs/output/docs $(find pkl/ -name '*.pkl')"
   - forester: "\"cd\" \"goldberg\"\n\"forester\" \"build\" \"docs/forest.toml\""
+  - 'theme_transform-html': "\"cd\" \"goldberg\"\n\"bash\" \"build-aux/forester-theme/transform.sh\" \"docs/output\""
   - copy_pkl: "\"cd\" \"goldberg\"\n\"cp\" \"-r\" \"pkl/.\" \"docs/output/\""
   - compress: "\"cd\" \"goldberg\"\n\"tar\" \"-C\" \"docs/output\" \"--hard-dereference\" \"-cvhz\" \".\" \"-f\" \"../site.tar.gz\""
   - deploy: "\"cd\" \"goldberg\"\n\"hut\" \"pages\" \"publish\" \"-d\" \"goldberg.farthergate.com\" \"../site.tar.gz\""
