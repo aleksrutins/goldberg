@@ -10,7 +10,7 @@ import "./pkl/presets/Pkldoc.pkl"
 import "./pkl/release/SourceHut.pkl"
 
 name = "goldberg"
-version = "0.5.1"
+version = "0.5.2"
 
 local buildDocs = new Listing {
   module.single(new Step {

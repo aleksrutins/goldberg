@@ -30,7 +30,7 @@ dependencies {
 }
 
 group = "com.farthergate"
-version = "0.5.1"
+version = "0.5.2"
 description = "goldberg"
 
 java {
