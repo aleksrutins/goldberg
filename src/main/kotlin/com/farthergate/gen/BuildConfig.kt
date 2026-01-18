@@ -45,6 +45,7 @@ data class BuildConfig(
                     }) },
 
                 config.steps.map { step -> step.resources }.reduce { acc, map -> acc + map }
+                + config.taskSteps.map { (_, steps) -> steps.map {it.resources} }.flatten().reduce { acc, map -> acc + map }
             )
         }
     }
