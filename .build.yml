@@ -10,7 +10,7 @@ environment:
   CLICOLOR_FORCE: always
 tasks: 
   - bash: "\"cd\" \"goldberg\"\ncurl https://cache.farthergate.com/install.sh | bash -s -- pkldoc forester"
-  - theme_install: "\"cd\" \"goldberg\"\n\"mkdir\" \"-p\" \"theme\"\n\"wget\" \"-O\" \"theme.tar.gz\" \"https://git.sr.ht/~aleksrutins/forester-theme/refs/download/v0.1.2/forester-theme-0.1.2.tar.gz\"\n\"tar\" \"xzf\" \"theme.tar.gz\" \"-C\" \"theme\""
+  - theme_install: "\"cd\" \"goldberg\"\n\"mkdir\" \"-p\" \"theme\"\n\"wget\" \"-O\" \"theme.tar.gz\" \"https://git.sr.ht/~aleksrutins/forester-theme/refs/download/v0.2.0/forester-theme-0.2.0.tar.gz\"\n\"tar\" \"xzf\" \"theme.tar.gz\" \"-C\" \"theme\""
   - copy_theme: "\"cd\" \"goldberg\"\n\"cp\" \"-r\" \"theme/.\" \"docs/theme/\""
   - pkldoc: "\"cd\" \"goldberg\"\npkldoc -o docs/output/docs $(find pkl/ -name '*.pkl')"
   - forester: "\"cd\" \"goldberg\"\n\"forester\" \"build\" \"docs/forest.toml\""
@@ -19,5 +19,5 @@ tasks:
   - compress: "\"cd\" \"goldberg\"\n\"tar\" \"-C\" \"docs/output\" \"--hard-dereference\" \"-cvhz\" \".\" \"-f\" \"../site.tar.gz\""
   - deploy: "\"cd\" \"goldberg\"\n\"hut\" \"pages\" \"publish\" \"-d\" \"goldberg.farthergate.com\" \"../site.tar.gz\""
   - gradle_fatjar: "\"cd\" \"goldberg\"\n\"./gradlew\" \"fatJar\""
-  - 'java_make-exe': "\"cd\" \"goldberg\"\n\"bash\" \"build-aux/java/make-executable-jar.sh\" \"build/libs/goldberg-0.5.2-standalone.jar\" \"goldberg-0.5.2\""
-  - release: "\"cd\" \"goldberg\"\n\"hut\" \"git\" \"artifact\" \"upload\" \"goldberg-0.5.2\" \"--rev\" \"v0.5.2\""
+  - 'java_make-exe': "\"cd\" \"goldberg\"\n\"bash\" \"build-aux/java/make-executable-jar.sh\" \"build/libs/goldberg-0.5.3-standalone.jar\" \"goldberg-0.5.3\""
+  - release: "\"cd\" \"goldberg\"\n\"hut\" \"git\" \"artifact\" \"upload\" \"goldberg-0.5.3\" \"--rev\" \"v0.5.3\""
