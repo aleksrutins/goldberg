@@ -1,9 +1,0 @@
-module com.farthergate.goldberg.presets.Ruby
-import "../Config.pkl"
-
-function npmCI() = new Config.Preset {
-  name = "npm:ci"
-  defaultSteps {
-    new { name = "npm:ci"; packages { "nodejs"; "npm" }; commands { new { "npm"; "ci" } } }
-  }
-}
